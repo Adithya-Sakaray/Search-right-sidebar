@@ -2,10 +2,12 @@
 """Closing the last tab that isn't a pin (Browser.close, #537), in a hidden probe.
 
 Build first (`./build.sh`), then `python3 Tests/close_last_tab.py` from a
-worktree. With only pins left beside it, the tab on screen closed leaves a
-new tab in its place, not a pin; the pins stay, and ⇧⌘T brings the page
-back. Closed in the background, it takes nothing from the pin on screen.
-With another ordinary tab left, the neighbour is picked as before.
+worktree. With Settings › Tabs › Leave a new tab when the last tab closes,
+and only pins left beside it, the tab on screen closed leaves a new tab in
+its place, not a pin; the pins stay, and ⇧⌘T brings the page back. Closed
+in the background, it takes nothing from the pin on screen. With another
+ordinary tab left, the neighbour is picked as before. With the switch off,
+a pin is picked, as it always was.
 """
 import sys
 from pathlib import Path
@@ -39,7 +41,7 @@ def only(*keep):
 def main():
     t = sv.T()
     try:
-        sv.setup(); sv.launch()
+        sv.setup(**{"tabs.newAfterLast": True}); sv.launch()
         a = sv.page("a"); p = sv.page("p")
         sv.cmd({"do": "pin", "id": a}); sv.cmd({"do": "pin", "id": p})
         b = sv.page("b")
@@ -73,6 +75,14 @@ def main():
         st = sv.sp("close", id=d)
         t.ok("with another tab left, that one is picked", st["activeID"] == e, st)
         t.ok("and no new tab is made for it", loose(st) == [e], st["tabs"])
+
+        # The switch off, as it comes: a pin is picked, as before.
+        sv.quit(); sv.setup(); sv.launch()
+        a = sv.page("a"); sv.cmd({"do": "pin", "id": a})
+        b = sv.page("b")
+        only(b)
+        st = sv.sp("close", id=b)
+        t.ok("switch off: the pin is picked, as before", st["activeID"] == a, st)
     finally:
         t.done(); sv.finish()
     sys.exit(1 if t.failed else 0)

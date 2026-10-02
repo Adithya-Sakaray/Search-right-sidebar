@@ -14,6 +14,7 @@ in [ROADMAP.md](ROADMAP.md).
 ### Added
 
 - The page as a card can be turned off, in Settings › Tabs › The page as a card, beside the sidebar's settings. Off, the page reaches the window's edges and the column is white with its fine line, as before 1.0.5. It stays on unless you turn it off. Asked for on [#607](https://github.com/driceroland/Search/issues/607)
+- Closing the last tab that isn't a pin can leave a new tab, as closing the only tab does, instead of taking you into a pin and waking it if it was asleep. The pins stay where they are, untouched, and ⇧⌘T brings the page back; closed behind a pin, it leaves the pin on screen. Off unless you turn it on in Settings › Tabs › Leave a new tab when the last tab closes. Thanks [@kingsleydon](https://github.com/kingsleydon) for reporting ([#537](https://github.com/driceroland/Search/issues/537))
 
 ### Changed
 
@@ -21,7 +22,6 @@ in [ROADMAP.md](ROADMAP.md).
 
 ### Fixed
 
-- Closing the last tab that isn't a pin leaves a new tab, as closing the only tab does. With pins in the row, ⌘W on it took you into a pin instead, and woke it if it was asleep; the pins now stay where they are, untouched, and ⇧⌘T brings the page back. Closed behind a pin, it leaves the pin on screen. Thanks [@kingsleydon](https://github.com/kingsleydon) for reporting ([#537](https://github.com/driceroland/Search/issues/537))
 - A pin moved to another space with Move to Space stays there. Moved to a space you didn't open before quitting, it was gone after a relaunch. Thanks [@karadoganyi](https://github.com/karadoganyi) ([#587](https://github.com/driceroland/Search/pull/587))
 - A website whose name begins with what reads as a private address is opened over https. The address field chose plain http for anything typed that started with "10." or "192.168.", which is how a server on this Mac or on the local network is reached, but those were tests on a name rather than on an address: 10.io, 10.ai, 10.org, 10.net and 10.fr are all registered websites, and so is 10.0.0.1.example.com. http://10.io/ answers without redirecting, so the page arrived unencrypted and stayed that way. A local server still gets http, now only when what was typed is four numbers and nothing more, as Dialogs.isLoopback already had it ([#590](https://github.com/driceroland/Search/issues/590))
 - Find on Page's close button and other controls respond to clicks with Split View enabled, instead of letting them reach the page underneath. Clicks outside the find bar still reach the page. ([#615](https://github.com/driceroland/Search/issues/615))
