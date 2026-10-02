@@ -1,0 +1,15 @@
+name: Verify 537
+on: { push: { branches: [ci/537-verify] } }
+jobs:
+  verify:
+    runs-on: macos-15
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          swift build 2>&1 | tee build.log
+          grep -E "(Browser|Prefs|Settings).swift:[0-9]+:[0-9]+: warning" build.log || echo "no warnings in Browser, Prefs or Settings"
+      - run: ./build.sh
+      - run: python3 Tests/close_last_tab.py
+      - run: python3 Tests/pin_tiers.py
