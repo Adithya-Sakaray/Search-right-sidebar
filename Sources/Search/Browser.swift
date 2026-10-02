@@ -2754,6 +2754,27 @@ final class Browser: NSObject, ObservableObject {
             return
         }
 
+        // The last tab that isn't a pin, on screen, with only pins left
+        // beside it: the same as the only tab. Landing on its neighbour took
+        // you into a pin you had not asked for, and woke it if it was asleep.
+        // The pins stay where they are; a new tab takes this one's place.
+        if activeID == tab.id, !tabs.contains(where: { $0.id != tab.id && $0.pin == nil }) {
+            if tab.isBlank {
+                NSApp.keyWindow?.performClose(nil)
+                return
+            }
+            let fresh = Tab(configuration: Web.configuration(space: spaceID))
+            prepare(fresh)
+            remember(tab, at: index)
+            tab.close()
+            tabs[index] = fresh
+            activeID = fresh.id
+            typed = ""
+            removeEmptyGroup(tab.groupID)
+            rememberSession()
+            return
+        }
+
         remember(tab, at: index, partner: partner?.id, onLeft: pair?.left == tab.id)
         tab.close()
         tabs.remove(at: index)
