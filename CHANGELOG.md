@@ -14,7 +14,7 @@ in [ROADMAP.md](ROADMAP.md).
 ### Added
 
 - The page as a card can be turned off, in Settings › Tabs › The page as a card, beside the sidebar's settings. Off, the page reaches the window's edges and the column is white with its fine line, as before 1.0.5. It stays on unless you turn it off. Asked for on [#607](https://github.com/driceroland/Search/issues/607)
-- Closing the last tab that isn't a pin can leave a new tab, as closing the only tab does, instead of taking you into a pin and waking it if it was asleep. The pins stay where they are, untouched, and ⇧⌘T brings the page back; closed behind a pin, it leaves the pin on screen. Off unless you turn it on in Settings › Tabs › Leave a new tab when the last tab closes. Thanks [@kingsleydon](https://github.com/kingsleydon) for reporting ([#537](https://github.com/driceroland/Search/issues/537))
+- Closing the last tab that isn't a pin can leave a new tab, as closing the only tab does, instead of taking you into a pin and waking it if it was asleep. The pins stay where they are, untouched, and ⇧⌘T brings the page back; closed behind a pin, it leaves the pin on screen. Off unless you turn it on in Settings › Tabs › Leave a new tab when the last tab closes. Thanks [@kingsleydon](https://github.com/kingsleydon) for reporting and [@Adithya-Sakaray](https://github.com/Adithya-Sakaray) for the fix ([#537](https://github.com/driceroland/Search/issues/537), [#538](https://github.com/driceroland/Search/pull/538))
 
 ### Changed
 
